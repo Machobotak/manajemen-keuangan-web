@@ -22,7 +22,18 @@ form.addEventListener('submit', function(event) {
 });
 function renderTable() {
     table.innerHTML = "";
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    
     transactions.forEach(item=>{
+    const amount = Number(item.amount);
+    if(item.type === "Income"){
+        totalIncome += amount;
+    }else{
+        totalExpense += amount
+    }
         const row = `
         <tr>
             <td>${item.date}</td>
@@ -32,5 +43,8 @@ function renderTable() {
         </tr>
         `;
         table.innerHTML += row;
-    })
+    });
+    totalIncomeE1.textContent = `Rp ${totalIncome.toLocaleString()}`;
+    totalExpenseE1.textContent = `Rp ${totalExpense.toLocaleString()}`;
+    balanceE1.textContent = `Rp ${(totalIncome - totalExpense).toLocaleString()}`;
 }

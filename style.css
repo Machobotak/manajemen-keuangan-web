@@ -1,6 +1,20 @@
 body {
     font-family: Arial,sans-serif;
     padding: 20px;
+    background-color: #f4f6f8;
+}
+h1{
+    margin-bottom: 20px;
+}
+
+.summary{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card{
+    
 }
 
 form input,form select,form button{
