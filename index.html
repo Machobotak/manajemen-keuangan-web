@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Keuangan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Manajemen Keuangan Pribadi</h1>
+    <form id="financeForm">
+        <input type="date" id="date" required>
+        <input type="text" id="desc" placeholder="Keterangan" required>
+        <input type="number" id="amount" placeholder="Nominal" required>
+
+        <select id="type">
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+        </select>
+        <button type="submit">Tambah</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Nominal</th>
+                <th>Tipe</th>
+            </tr>
+        </thead>
+        <tbody id="dataTable"></tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
