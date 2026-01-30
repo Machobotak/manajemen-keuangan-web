@@ -34,7 +34,8 @@ form.addEventListener('submit',function(event){
         body:JSON.stringify(transaction)
     })
     .then(res=> res.json())
-    .then(()=>{
+    .then(data=>{
+        console.log("Respon SERVER: ",data);
         fetchData();
         form.reset();
     }) 

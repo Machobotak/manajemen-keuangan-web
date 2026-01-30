@@ -10,16 +10,17 @@ if(!$data){
     exit;
 }
 
-$file = "data.json";
+$file = __DIR__."/data.json";
+
 $existingData = [];
 
 if(file_exists($file)){
-    $existingData = json_encode(file_get_contents($file),true);
+    $existingData = json_decode(file_get_contents($file),true);
 }
 
 $existingData[] = $data;
 
-file_put_contents($file,json_encode($existingData));
+file_put_contents($file,json_encode($existingData,JSON_PRETTY_PRINT));
 
 echo json_encode([
     "status" => "success",
