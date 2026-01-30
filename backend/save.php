@@ -1,5 +1,7 @@
 <?php
+
 header("Content-Type: application/json");
+
 $data = json_decode(file_get_contents("php://input"),true);
 
 if(!$data){
@@ -12,18 +14,29 @@ if(!$data){
 
 $file = __DIR__."/data.json";
 
-$existingData = [];
+$transactions =[];
 
 if(file_exists($file)){
-    $existingData = json_decode(file_get_contents($file),true);
+    $transactions = json_decode(file_get_contents($file),true);
 }
 
-$existingData[] = $data;
+$newTransactions = [
+    "id"=>uniqid(),
+    "date"=> $data["date"],
+    "desc"=> $data["desc"],
+    "amount"=>$data["amount"],
+    "type"=>$data["type"]
+];
 
-file_put_contents($file,json_encode($existingData,JSON_PRETTY_PRINT));
+$transactions [] = $newTransactions;
+
+
+file_put_contents(
+    $file,
+    json_encode($transactions,JSON_PRETTY_PRINT));
 
 echo json_encode([
     "status" => "success",
     "message" => "Data berhasil disimpan",
-    "data" => $data
+    "data" => $newTransactions
 ]);
