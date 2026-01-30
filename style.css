@@ -14,20 +14,46 @@ h1{
 }
 
 .card{
-    
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-form input,form select,form button{
-    margin: 20px;
-    padding: 6px;
+.income {
+    background-color: #2ecc71;
+}
+
+.expense {
+    background-color: #e74c3c;
+}
+
+
+form {
+    margin-bottom: 20px;
+}
+
+form input,
+form select,
+form button{
+    margin: 5px;
+    padding: 8px;
 }
 
 table{
-    margin-top: 20px;
+    width: 100%;
     border-collapse: collapse;
+    background-color: white;
 }
 
-table,th,td{
-    border: 1px solid black;
-    padding: 8px;
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+th,td{
+    border: 1px solid #ddd;
+    padding: 10px;
 }

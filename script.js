@@ -1,5 +1,8 @@
 const form = document.getElementById('financeForm');
 const table = document.getElementById('dataTable');
+const totalExpenseEl = document.getElementById('totalExpense');
+const totalIncomeEl = document.getElementById('totalIncome');
+const balanceEl = document.getElementById('balance');
 
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
@@ -29,7 +32,7 @@ function renderTable() {
     
     transactions.forEach(item=>{
     const amount = Number(item.amount);
-    if(item.type === "Income"){
+    if(item.type === "income"){
         totalIncome += amount;
     }else{
         totalExpense += amount
@@ -44,7 +47,7 @@ function renderTable() {
         `;
         table.innerHTML += row;
     });
-    totalIncomeE1.textContent = `Rp ${totalIncome.toLocaleString()}`;
-    totalExpenseE1.textContent = `Rp ${totalExpense.toLocaleString()}`;
-    balanceE1.textContent = `Rp ${(totalIncome - totalExpense).toLocaleString()}`;
+    totalIncomeEl.textContent = `Rp ${totalIncome.toLocaleString()}`;
+    totalExpenseEl.textContent = `Rp ${totalExpense.toLocaleString()}`;
+    balanceEl.textContent = `Rp ${(totalIncome - totalExpense).toLocaleString()}`;
 }
