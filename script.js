@@ -5,6 +5,7 @@ const totalExpenseEl = document.getElementById('totalExpense');
 const totalIncomeEl = document.getElementById('totalIncome');
 const balanceEl = document.getElementById('balance');
 
+
 fetchData();
 
 function fetchData(){
@@ -20,13 +21,18 @@ form.addEventListener('submit',function(event){
     event.preventDefault();
 
     const transaction = {
+        id:editId,
         date: document.getElementById('date').value,
         desc: document.getElementById('desc').value,
         amount: document.getElementById('amount').value,
         type: document.getElementById('type').value
     };
 
-    fetch("backend/save.php",{
+    const url = editId
+    ? "backend/update.php"
+    : "backend/save.php";
+
+    fetch(url,{
         method: "POST",
         headers: {
             "Content-Type":"application/json"
@@ -38,6 +44,8 @@ form.addEventListener('submit',function(event){
         console.log("Respon SERVER: ",data);
         fetchData();
         form.reset();
+
+        submitBtn.textContent = "Tambah"
     }) 
     .catch(err=>console.error(err));
 });
@@ -63,6 +71,10 @@ function renderTable(transactions){
             <td>${item.desc}</td>
             <td>Rp ${amount.toLocaleString()}</td>
             <td>${item.type}</td>
+            <td>
+                <button onclick="editTransaction('${item.id}')">edit</button>
+                <button onclick="deleteTransaction('${item.id}')">hapus</button>
+            </td>
         </tr>
         `;
         table.innerHTML += row;
@@ -71,4 +83,40 @@ function renderTable(transactions){
     totalIncomeEl.textContent = `Rp ${totalIncome.toLocaleString()}`;
     totalExpenseEl.textContent = `Rp ${totalExpense.toLocaleString()}`;
     balanceEl.textContent = `Rp ${(totalIncome - totalExpense).toLocaleString()}`;
+}
+
+function deleteTransaction(id){
+    if(!confirm("Yakin ingin mengahapus transaksi ini?")){
+        return;
+    }
+
+    fetch("backend/delete.php",{
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({id})
+    })
+    .then(res=>res.json())
+    .then(()=>{
+        fetchData();
+    })
+    .catch(err=>console.error(err));
+}
+
+function editTransaction(id){
+    let editId = null;
+    const submitBtn = document.querySelector("form button");
+
+    fetch("backend/get.php")
+    .then(res=>res.json())
+    .then(data=>{
+        const item = data.find(t=>t.id === id);
+        if(!item) return;
+        document.getElementById("date").value=item.date;
+        document.getElementById("desc").value=item.desc;
+        document.getElementById("amount").value=item.amount;
+        document.getElementById("type").value=item.type;
+        editId = id;
+
+        submitBtn.textContent = "Update"
+    });
 }
