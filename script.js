@@ -1,3 +1,7 @@
+let editId = null;
+const submitBtn = document.querySelector("form button");
+const cancelBtn = document.getElementById("cancelEdit");
+
 const form = document.getElementById('financeForm');
 const table = document.getElementById('dataTable');
 
@@ -45,7 +49,10 @@ form.addEventListener('submit',function(event){
         fetchData();
         form.reset();
 
-        submitBtn.textContent = "Tambah"
+        editId = null;
+        submitBtn.textContent = "Tambah";
+        cancelBtn.style.display = "none";
+        const cancelBtn = document.getElementById("cancelEdit");
     }) 
     .catch(err=>console.error(err));
 });
@@ -103,8 +110,6 @@ function deleteTransaction(id){
 }
 
 function editTransaction(id){
-    let editId = null;
-    const submitBtn = document.querySelector("form button");
 
     fetch("backend/get.php")
     .then(res=>res.json())
@@ -115,8 +120,17 @@ function editTransaction(id){
         document.getElementById("desc").value=item.desc;
         document.getElementById("amount").value=item.amount;
         document.getElementById("type").value=item.type;
-        editId = id;
 
-        submitBtn.textContent = "Update"
+        editId = id;
+        submitBtn.textContent = "Update";
+        cancelBtn.style.display = "inline-block";
     });
 }
+
+cancelBtn.addEventListener("click",function(){
+    editId = null;
+    form.reset();
+
+    submitBtn.textContent = "Tambah";
+    cancelBtn.style.display = "none";
+});

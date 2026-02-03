@@ -27,12 +27,14 @@
         <input type="date" id="date" required>
         <input type="text" id="desc" placeholder="Keterangan" required>
         <input type="number" id="amount" placeholder="Nominal" required>
-
         <select id="type">
             <option value="income">Pemasukan</option>
             <option value="expense">Pengeluaran</option>
         </select>
         <button type="submit">Tambah</button>
+        <button type="button" id="cancelEdit" style="display: none;">
+            Batal
+        </button>
     </form>
     <table>
         <thead>
