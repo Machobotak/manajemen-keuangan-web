@@ -7,47 +7,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Manajemen Keuangan Pribadi</h1>
-    <div class="summary">
-        <div class="card income">
-            <h3>Pemasukan</h3>
-            <p id="totalIncome">Rp 0</p>
+    <nav class="navbar">
+        <div class="logo">💸 FinanceKu</div>
+        <div class="user">Guest</div>
+    </nav>
+    <div class="container">
+        <h1>Manajemen Keuangan Pribadi</h1>
+        <div class="summary">
+            <div class="summary-item">
+                <h3>Total Pemasukan</h3>
+                <p id="totalIncome">Rp 0</p>
+            </div>
+            <div class="summary-item">
+                <h3>Total Pengeluaran</h3>
+                <p id="totalExpense">Rp 0</p>
+            </div>
+            <div class="summary-item">
+                <h3>Saldo Bersih</h3>
+                <p id="netBalance">Rp 0</p>
+            </div>
         </div>
-        <div class="card expense">
-            <h3>Pengeluaran</h3>
-            <p id="totalExpense">Rp 0</p>
+        <div class="card form-card">
+            <h3>Tambah Transaksi</h3>
+            <form id="financeForm">
+                <input type="date" id="date" required>
+                <input type="text" id="desc" placeholder="Keterangan" required>
+                <input type="number" id="amount" placeholder="Nominal" required>
+                <select id="type">
+                    <option value="income">Pemasukan</option>
+                    <option value="expense">Pengeluaran</option>
+                </select>
+                <button type="submit">Tambah</button>
+                <button type="button" id="cancelEdit" style="display: none;">
+                    Batal
+                </button>
+            </form>
         </div>
-        <div class="card balance">
-            <h3>Saldo</h3>
-            <p id="balance">Rp 0</p>
+        <div class="card table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Nominal</th>
+                        <th>Tipe</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable"></tbody>
+            </table>
         </div>
-    </div>    
-
-    <form id="financeForm">
-        <input type="date" id="date" required>
-        <input type="text" id="desc" placeholder="Keterangan" required>
-        <input type="number" id="amount" placeholder="Nominal" required>
-        <select id="type">
-            <option value="income">Pemasukan</option>
-            <option value="expense">Pengeluaran</option>
-        </select>
-        <button type="submit">Tambah</button>
-        <button type="button" id="cancelEdit" style="display: none;">
-            Batal
-        </button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>Keterangan</th>
-                <th>Nominal</th>
-                <th>Tipe</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="dataTable"></tbody>
-    </table>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

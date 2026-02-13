@@ -1,7 +1,30 @@
+:root {
+    --primary:#2563eb;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial,sans-serif;
-    padding: 20px;
-    background-color: #f4f6f8;
+    margin: 0;
+    font-family: 'Inter',system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
 }
 h1{
     margin-bottom: 20px;
