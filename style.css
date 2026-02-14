@@ -16,6 +16,13 @@ body {
     font-family: 'Inter',system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
+    background: linear-gradient(to bottom, #f8fafc, #eef2f7);
+}
+
+.container{
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 50px;
 }
 
 .navbar {
@@ -24,7 +31,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -56,13 +63,13 @@ h1{
     background: var(--card);
     padding: 22px;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform .2s ease,box-shadow.2s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .card:hover{
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0 , 0, 0, 0.8);
+    box-shadow: 0 20px 40px rgba(0 , 0, 0, 0.08);
 }
 
 .income {
@@ -104,14 +111,14 @@ form select{
     padding: 10px 12px;
     border-radius: 10px;
     border: 1px solid #cbd5e1;
-    transition: border.2s ease,box-shadow.2s ease;
+    transition: border .2s ease, box-shadow .2s ease;
 }
 
 form input:focus,
 form select:focus{
     outline: none;
     border: 1px solid #cbd5e1;
-    transition: border.2s ease,box-shadow.2s ease;
+    transition: border .2s ease, box-shadow .2s ease;
 }
 
 
@@ -140,7 +147,20 @@ form button[type="submit"]:hover{
     margin-top: 30px;
 }
 
+.card,
+.table-card{
+    animation: fadeIn .4s ease;
+}
 
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(8px);
+    }to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 table{
     width: 100%;
