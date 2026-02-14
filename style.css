@@ -107,21 +107,78 @@ form select{
     transition: border.2s ease,box-shadow.2s ease;
 }
 
+form input:focus,
+form select:focus{
+    outline: none;
+    border: 1px solid #cbd5e1;
+    transition: border.2s ease,box-shadow.2s ease;
+}
+
 
 form button{
-    margin: 5px;
-    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all.2 ease;
 }
+
+form button[type="submit"]{
+    background: var(--primary);
+    color: white;
+}
+
+form button[type="submit"]:hover{
+    background: #1d4ed8;
+}
+
+#cancelEdit{
+    background: #e2e8f0;
+}
+
+.table-card{
+    margin-top: 30px;
+}
+
+
 
 table{
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
 }
 
 th {
-    background-color: #3498db;
-    color: white;
+    text-align: left;
+    font-size: 13px;
+    color: #64748b;
+    padding-bottom: 14px;
+    padding-top: 12px;
+}
+
+td{
+    padding: 14px;
+    border-top: 1px solid #e2e8f0;
+    transition: background.2s ease;
+}
+
+tr:hover td{
+    background: #f8fafc;
+}
+
+td button{
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+td button:first-child{
+    background: #fde68a;
+}
+
+td button:last-child{
+    background: #fecaca;
 }
 
 th,td{
