@@ -270,3 +270,20 @@ th,td{
 .theme-switch input:checked + .slider::before{
     transform: translateX(24px);
 }
+
+.chart-card{
+    margin-top: 40px;
+}
+
+.chart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#rangeFilter{
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}

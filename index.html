@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
     <nav class="navbar">
         <div class="logo">💸 FinanceKu</div>
@@ -32,6 +33,19 @@
             <div class="card balance">
                 <h3>Saldo Bersih</h3>
                 <p id="netBalance">Rp 0</p>
+            </div>
+        </div>
+        <div class="card chart-card">
+            <div class="chart-header">
+                <h3>Statistik Keuangan</h3>
+                <select id="rangeFilter">
+                    <option value="today">Hari ini</option>
+                    <option value="7days">7 Hari Terakhir</option>
+                    <option value="30days">30 Hari Terakhir</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <canvas id="financeChart"></canvas>
             </div>
         </div>
         <div class="card form-card">

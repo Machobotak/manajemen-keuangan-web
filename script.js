@@ -17,9 +17,15 @@ function fetchData(){
     .then(res => res.json())
     .then(data =>{
         renderTable(data);
+
+        const range = document.getElementById("rangeFilter").value;
+        const filtered = filterTransactions(data,range);
+        updateChart(filtered);
     })
     .catch(err => console.error(err));
 }
+
+document.getElementById("rangeFilter").addEventListener("change",fetchData);
 
 form.addEventListener('submit',function(event){
     event.preventDefault();
@@ -150,3 +156,59 @@ themeToggle.addEventListener("change",()=>{
     localStorage.setItem("theme",isDark ? "dark":"light");
 
 });
+
+let chart;
+const ctx = document.getElementById("financeChart");
+
+function initChart(){
+    chart = new Chart(ctx,{
+        type:"bard",
+        data:{
+            labels:["Pemasukan","Pengeluaran"],
+            datasets:[{
+                label:"Jumlah (Rp)",
+                data:[0,0],
+                backgroundColor: ["#22c55e","#ef4444"],
+                boderRadius : 8
+            }]
+        },
+        options:{
+            responsive: true,
+            plugins:{
+                legend:{display:false}
+            }
+        }
+    });
+}
+initChart();
+
+function filterTransactions(transactions,range){
+    const now = new Date();
+    let startDate;
+
+    if(range === "today"){
+        startDate = new Date(now.setHours(0,0,0,0));
+    }else if(range === "7days") {
+        startDate = new Date();
+        startDate.setDate(startDate.getDate()-7);
+    }else if(range === "30days"){
+        startDate = new Date();
+        startDate.setDate(startDate.getDate()-30);
+    }
+
+    return transactions.filter(t=> new Date(t.date)>= startDate);
+}
+
+function updateChart(transactions){
+    let income = 0;
+    let expense = 0;
+
+    transactions.forEach(t=>{
+        if(t.type === "income") income += Number(t.amount);
+        else expense += Number(t.amount);
+    });
+
+    chart.data.datasets[0].data = [income,expense];
+    chart.update()
+}
+
