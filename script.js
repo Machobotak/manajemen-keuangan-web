@@ -139,15 +139,14 @@ const themeToggle = document.getElementById("themeToggle");
 
 if (localStorage.getItem("theme")===("dark")){
     document.body.classList.add("dark");
-    themeToggle.textContent = "☀️";
+    themeToggle.checked = true;
 }
 
-themeToggle.addEventListener("click",()=>{
-    document.body.classList.toggle("dark");
+themeToggle.addEventListener("change",()=>{
+    const isDark = themeToggle.checked;
 
-    const isDark = document.body.classList.contains("dark");
+    document.body.classList.toggle("dark",isDark);
 
-    localStorage.setItem("theme",isDark ? "dark":light);
-    themeToggle.textContent = isDark ? "🌙":"☀️";
+    localStorage.setItem("theme",isDark ? "dark":"light");
 
 });
