@@ -228,3 +228,62 @@ th,td{
 #themeToggle:hover{
     transform: scale(1.05);
 }
+
+.theme-switch{
+    position: relative;
+    width: 50px;
+    height: 26px;
+    display: inline-block;
+}
+
+.theme-switch input{
+    opacity: 0px;
+    width: 0px;
+    height: 0px;
+}
+
+.slider{
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #64748b;
+    border-radius: 50px;
+    transition: background .3s ease;
+}
+
+.slider::before{
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    top: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform .3s ease;
+}
+
+.theme-switch input:checked + .slider{
+    background-color: #2563eb;
+}
+
+.theme-switch input:checked + .slider::before{
+    transform: translateX(24px);
+}
+
+.chart-card{
+    margin-top: 40px;
+}
+
+.chart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#rangeFilter{
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
