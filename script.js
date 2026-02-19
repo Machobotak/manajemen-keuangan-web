@@ -223,27 +223,42 @@ function filterTransactions(transactions,range){
 }
 
 function updateChart(transactions){
+    const range = document.getElementById("rangeFilter").value;
     const grouped = {};
 
     transactions.forEach(t=>{
-        if(!grouped[t.date]){
-            grouped[t.date]={income:0,expanse:0};
+        const dateObj = new Date(t.created_at||t.date);
+
+        let key;
+
+        if(range==="today"){
+            key = dateObj.getHours()+":00";
+        }else{
+            key = t.date;
+        }
+        if(!grouped[key]){
+            grouped[key]={income:0,expanse:0};
         }
 
         if(t.type==="income"){
-            grouped[t.date].income += Number(t.amount);
+            grouped[key].income += Number(t.amount);
         }else{
-            grouped[t.date].expanse += Number(t.amount);
+            grouped[key].expanse += Number(t.amount);
         }
     });
 
-    const labels = Object.keys(grouped).sort();
-    const incomeData = labels.map(date=>grouped[date].income);
-    const expanseData = labels.map(date=>grouped[date].expanse);
+
+    const labels = Object.keys(grouped).sort((a,b)=>{
+        return new Date("1970/01/01 "+a)-new Date("1970/01/01 "+b);
+    });
+
+    const incomeData = labels.map(k=>grouped[k].income);
+    const expanseData = labels.map(k=>grouped[k].expanse);
 
     chart.data.labels = labels;
     chart.data.datasets[0].data = incomeData;
     chart.data.datasets[1].data = expanseData;
+    
     chart.update();
 }
 

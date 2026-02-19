@@ -25,7 +25,8 @@ $newTransactions = [
     "date"=> $data["date"],
     "desc"=> $data["desc"],
     "amount"=>$data["amount"],
-    "type"=>$data["type"]
+    "type"=>$data["type"],
+    "created_at"=>date("Y-m-d H:i:s")
 ];
 
 $transactions [] = $newTransactions;
