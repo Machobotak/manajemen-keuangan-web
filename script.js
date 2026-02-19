@@ -7,7 +7,7 @@ const table = document.getElementById('dataTable');
 
 const totalExpenseEl = document.getElementById('totalExpense');
 const totalIncomeEl = document.getElementById('totalIncome');
-const balanceEl = document.getElementById('balance');
+const balanceEl = document.getElementById('netBalance');
 
 
 fetchData();
@@ -162,7 +162,7 @@ const ctx = document.getElementById("financeChart");
 
 function initChart(){
     chart = new Chart(ctx,{
-        type:"bard",
+        type:"bar",
         data:{
             labels:["Pemasukan","Pengeluaran"],
             datasets:[{
