@@ -162,20 +162,43 @@ const ctx = document.getElementById("financeChart");
 
 function initChart(){
     chart = new Chart(ctx,{
-        type:"bar",
+        type:"line",
         data:{
-            labels:["Pemasukan","Pengeluaran"],
-            datasets:[{
-                label:"Jumlah (Rp)",
-                data:[0,0],
-                backgroundColor: ["#22c55e","#ef4444"],
-                boderRadius : 8
-            }]
+            labels:[],
+            datasets:[
+                {
+                    label: "Pemasukan",
+                    data:[],
+                    borderColor:"#22c55e",
+                    backgroundColor: "rgba(34,197,94,0.1)",
+                    tension:0.4,
+                    fill:true
+                },
+                {
+                    label:"Pengeluaran",
+                    data:[],
+                    borderColor:"#ef4444",
+                    backgroundColor:"rgba(239,68,68,0.1)",
+                    tension:0.4,
+                    fill:true
+                }
+            ]
         },
         options:{
             responsive: true,
+            interaction:{
+                mode:"index",
+                intersect:false
+            },
             plugins:{
-                legend:{display:false}
+                legend:{
+                    position:"bottom"
+                }
+            },
+            scales:{
+                y:{
+                    beginAtZero:true
+                }
             }
         }
     });
@@ -200,15 +223,27 @@ function filterTransactions(transactions,range){
 }
 
 function updateChart(transactions){
-    let income = 0;
-    let expense = 0;
+    const grouped = {};
 
     transactions.forEach(t=>{
-        if(t.type === "income") income += Number(t.amount);
-        else expense += Number(t.amount);
+        if(!grouped[t.date]){
+            grouped[t.date]={income:0,expanse:0};
+        }
+
+        if(t.type==="income"){
+            grouped[t.date].income += Number(t.amount);
+        }else{
+            grouped[t.date].expanse += Number(t.amount);
+        }
     });
 
-    chart.data.datasets[0].data = [income,expense];
-    chart.update()
+    const labels = Object.keys(grouped).sort();
+    const incomeData = labels.map(date=>grouped[date].income);
+    const expanseData = labels.map(date=>grouped[date].expanse);
+
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = incomeData;
+    chart.data.datasets[1].data = expanseData;
+    chart.update();
 }
 
